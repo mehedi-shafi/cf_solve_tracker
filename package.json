@@ -1,0 +1,22 @@
+{
+  "name": "cf-tracker",
+  "version": "1.0.0",
+  "description": "An API to get contest status for blue sheet students.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "cf",
+    "codeforces",
+    "blue-sheet"
+  ],
+  "author": "Mehedi Shafi",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "request": "^2.88.0"
+  }
+}
