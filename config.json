@@ -1,8 +1,4 @@
 {
-    "codeforces": {
-        "key": "f5eb07971a75578700cf2307684d3ec5c3a12fa3",
-        "secret": "62360345e656e9c1051f9dc1bba428110849d4a0"
-    },
     "urls": {
         "contest_status": "https://codeforces.com/api/contest.status?contestId={{ contestId }}&handle={{ handle }}>"
     },
