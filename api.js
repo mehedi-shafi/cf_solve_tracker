@@ -17,7 +17,7 @@ let getContestStatus = (url, callback) => {
 let processStatus = (contestStatus) => {
     if (contestStatus.status == 'OK'){
         if (contestStatus.result.length == 0){
-            return [0, 0];
+            return ['A', 0];
         }
         else{
             return getSolveCount(contestStatus.result);
@@ -42,7 +42,24 @@ let getSolveCount = (submissions) => {
             upsolve ++;
         }
     }
+    if (contestSolve == 0){
+        let contestSubmission = contestTimeSubmissionCount(submissions);
+        if (contestSubmission == 0){
+            contestSolve = 'A';
+        }
+    }
     return [contestSolve, upsolve];
+}
+
+let contestTimeSubmissionCount = (submissions) => {
+    let z = submissions.length;
+    let cnt = 0;
+    for (let i = 0; i < z; ++i){
+        if (submissions[i].author.participantType == 'CONTESTANT'){
+            cnt ++;
+        }
+    }
+    return cnt;
 }
 
 let isContestSolve = (submission) => {
