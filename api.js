@@ -32,24 +32,67 @@ let processStatus = (contestStatus) => {
 
 let getSolveCount = (submissions) => {
     let submissionCount = submissions.length;
-    let upsolve = 0;
-    let contestSolve = 0;
-    for (let i = 0; i < submissionCount; ++i){
-        if (isContestSolve(submissions[i])){
-            contestSolve++;
-        }
-        else if (isUpSolve(submissions[i])){
-            upsolve ++;
+    let upsolves = getUpSolveSubmissions(submissions);
+    let contestSolves = getContestSubmissions(submissions);
+    if (contestSolves.length == 0){
+        return ['A', upsolves.length];
+    }
+    let n = contestSolves.length;
+    for (let i = 0; i < n; ++i){
+        if (isin(upsolves, contestSolves[i])){
+            upsolves.splice(upsolves.indexOf(contestSolves[i]), 1);
         }
     }
-    if (contestSolve == 0){
-        let contestSubmission = contestTimeSubmissionCount(submissions);
-        if (contestSubmission == 0){
-            contestSolve = 'A';
-        }
-    }
-    return [contestSolve, upsolve];
+    return [contestSolves.length, upsolves.length];
 }
+
+let getContestSubmissions = (submissions) => {
+    let n = submissions.length;
+    let contestSubmissions = [];
+    for (let i = 0; i < n; ++i){
+        if (submissions[i].author.participantType == 'CONTESTANT' || submissions[i].author.participantType == 'OUT_OF_COMPETITION'){
+            contestSubmissions.push(submissions[i]);
+        }
+    }
+    if (contestSubmissions.length == 0){
+        return [];
+    }
+    return getUniqueSolveSubmissions(contestSubmissions);
+}
+
+let getUpSolveSubmissions = (submissions) => {
+    let n = submissions.length;
+    let upsolveSubmissions = [];
+    for (let i = 0; i < n; ++i){
+        if (submissions[i].author.participantType == 'PRACTICE'){
+            upsolveSubmissions.push(submissions[i]);
+        }
+    }
+    return getUniqueSolveSubmissions(upsolveSubmissions);
+}
+
+let getUniqueSolveSubmissions = (submissions) => {
+    let n = submissions.length;
+    let uniqueSolves = [];
+    for (let i = 0; i < n; ++i){
+        if (submissions[i].verdict == 'OK'){
+            if (!isin(uniqueSolves, submissions[i].problem.index)){
+                uniqueSolves.push(submissions[i].problem.index);
+            }
+        }
+    }
+}
+
+let isin = (arr, x) => {
+    let n = arr.length;
+    for (let i = 0; i < x; ++i){
+        if (arr[i] == x){
+            return true;
+        }
+    }
+    return false;
+}
+
 
 let contestTimeSubmissionCount = (submissions) => {
     let z = submissions.length;
