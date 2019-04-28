@@ -37,7 +37,6 @@ let getSolveCount = (submissions) => {
     let upSolves = getUpSolveSubmissions(submissions);
     let onlineCount = 0;
     let upSolveCount = 0;
-    console.log(onlineParticipant);
 
     for(var sub of acSubmissions){
         if(contestSolves[sub]) onlineCount++;
