@@ -86,7 +86,7 @@ let getUniqueSolveSubmissions = (submissions) => {
 
 let isin = (arr, x) => {
     let n = arr.length;
-    for (let i = 0; i < x; ++i){
+    for (let i = 0; i < n; ++i){
         if (arr[i] == x){
             return true;
         }
