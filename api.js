@@ -31,19 +31,29 @@ let processStatus = (contestStatus) => {
 }
 
 let getSolveCount = (submissions) => {
+    let onlineParticipant = getOnlineSubmissionCount(submissions);
     let acSubmissions = getAcSubmissions(submissions);
     let contestSolves = getContestSubmissions(submissions);
-    let upsolves = getUpSolveSubmissions(submissions);
-    if (contestSolves.length == 0){
-        return ['A', upsolves.length];
-    }
+    let upSolves = getUpSolveSubmissions(submissions);
     let onlineCount = 0;
     let upSolveCount = 0;
+    console.log(onlineParticipant);
+
     for(var sub of acSubmissions){
         if(contestSolves[sub]) onlineCount++;
-        else if(upsolves[sub]) upSolveCount++;
+        else if(upSolves[sub]) upSolveCount++;
     }
+    if (onlineParticipant == 0) return ['A', upSolveCount];
     return [onlineCount, upSolveCount];
+}
+
+let getOnlineSubmissionCount = (submissions) => {
+    let n = submissions.length;
+    for (let i = 0; i < n; ++i){
+        if(submissions[i].author.participantType == 'CONTESTANT' || submissions[i].author.participantType == 'OUT_OF_COMPETITION')
+            return 1;
+    }
+    return 0;
 }
 
 let getAcSubmissions = (submissions) =>{
@@ -62,9 +72,6 @@ let getContestSubmissions = (submissions) => {
         if (submissions[i].author.participantType == 'CONTESTANT' || submissions[i].author.participantType == 'OUT_OF_COMPETITION'){
             if(submissions[i].verdict == 'OK') contestSubmissions[submissions[i].problem.index]=1;
         }
-    }
-    if (contestSubmissions.length == 0){
-        return {};
     }
     return contestSubmissions;
 }
