@@ -81,6 +81,7 @@ let getUniqueSolveSubmissions = (submissions) => {
             }
         }
     }
+    return uniqueSolves;
 }
 
 let isin = (arr, x) => {
