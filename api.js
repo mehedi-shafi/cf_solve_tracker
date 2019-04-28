@@ -31,97 +31,53 @@ let processStatus = (contestStatus) => {
 }
 
 let getSolveCount = (submissions) => {
-    let submissionCount = submissions.length;
-    let upsolves = getUpSolveSubmissions(submissions);
+    let acSubmissions = getAcSubmissions(submissions);
     let contestSolves = getContestSubmissions(submissions);
+    let upsolves = getUpSolveSubmissions(submissions);
     if (contestSolves.length == 0){
         return ['A', upsolves.length];
     }
-    let n = contestSolves.length;
-    for (let i = 0; i < n; ++i){
-        if (isin(upsolves, contestSolves[i])){
-            upsolves.splice(upsolves.indexOf(contestSolves[i]), 1);
-        }
+    let onlineCount = 0;
+    let upSolveCount = 0;
+    for(var sub of acSubmissions){
+        if(contestSolves[sub]) onlineCount++;
+        else if(upsolves[sub]) upSolveCount++;
     }
-    return [contestSolves.length, upsolves.length];
+    return [onlineCount, upSolveCount];
+}
+
+let getAcSubmissions = (submissions) =>{
+    let n=submissions.length;
+    let acSubmissions=new Set();
+    for (let i=0; i < n; ++i){
+        if(submissions[i].verdict == 'OK') acSubmissions.add(submissions[i].problem.index);
+    }
+    return acSubmissions;
 }
 
 let getContestSubmissions = (submissions) => {
     let n = submissions.length;
-    let contestSubmissions = [];
+    let contestSubmissions = {};
     for (let i = 0; i < n; ++i){
         if (submissions[i].author.participantType == 'CONTESTANT' || submissions[i].author.participantType == 'OUT_OF_COMPETITION'){
-            contestSubmissions.push(submissions[i]);
+            if(submissions[i].verdict == 'OK') contestSubmissions[submissions[i].problem.index]=1;
         }
     }
     if (contestSubmissions.length == 0){
-        return [];
+        return {};
     }
-    return getUniqueSolveSubmissions(contestSubmissions);
+    return contestSubmissions;
 }
 
 let getUpSolveSubmissions = (submissions) => {
     let n = submissions.length;
-    let upsolveSubmissions = [];
+    let upsolveSubmissions = {};
     for (let i = 0; i < n; ++i){
-        if (submissions[i].author.participantType == 'PRACTICE'){
-            upsolveSubmissions.push(submissions[i]);
+        if (submissions[i].author.participantType == 'PRACTICE' || submissions[i].author.participantType == 'VIRTUAL'){
+            if(submissions[i].verdict == 'OK') upsolveSubmissions[submissions[i].problem.index]=1;
         }
     }
-    return getUniqueSolveSubmissions(upsolveSubmissions);
-}
-
-let getUniqueSolveSubmissions = (submissions) => {
-    let n = submissions.length;
-    let uniqueSolves = [];
-    for (let i = 0; i < n; ++i){
-        if (submissions[i].verdict == 'OK'){
-            if (!isin(uniqueSolves, submissions[i].problem.index)){
-                uniqueSolves.push(submissions[i].problem.index);
-            }
-        }
-    }
-    return uniqueSolves;
-}
-
-let isin = (arr, x) => {
-    let n = arr.length;
-    for (let i = 0; i < n; ++i){
-        if (arr[i] == x){
-            return true;
-        }
-    }
-    return false;
-}
-
-
-let contestTimeSubmissionCount = (submissions) => {
-    let z = submissions.length;
-    let cnt = 0;
-    for (let i = 0; i < z; ++i){
-        if (submissions[i].author.participantType == 'CONTESTANT'){
-            cnt ++;
-        }
-    }
-    return cnt;
-}
-
-let isContestSolve = (submission) => {
-    if (submission.author.participantType == "CONTESTANT"){
-        if (submission.verdict == "OK"){
-            return true;
-        }
-    }
-    return false;
-}
-
-let isUpSolve = (submission) => {
-    if (submission.author.participantType != "CONTESTANT"){
-        if (submission.verdict == "OK"){
-            return true;
-        }
-    }
-    return false;
+    return upsolveSubmissions;
 }
 
 module.exports.getContestStatus = getContestStatus;
