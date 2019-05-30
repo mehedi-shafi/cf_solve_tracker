@@ -10,4 +10,4 @@
 
 ### Running
 * Run the server by `npm run start` command.
-* Visit _localhost:8000/<< handle >>/<< contest_id >>_
+* Send GET request to localhost:8000 as following format _localhost:8000/<< handle >>/<< contest_id >>_
