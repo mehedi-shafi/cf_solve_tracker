@@ -4,5 +4,17 @@
     },
     "server":{
         "port": 8000
+    },
+    "log":{
+        "log": true,
+        "freq": "daily",
+        "params": [
+            "timestamp",
+            "ip",
+            "contestant",
+            "contest",
+            "solve",
+            "upsolve"
+        ]
     }
 }
