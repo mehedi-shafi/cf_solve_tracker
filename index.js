@@ -1,9 +1,11 @@
-let fs = require('fs');
-let express = require('express');
-let cors = require('cors');
+import fs from 'fs';
+import express from 'express';
+import cors from 'cors';
+import http from 'http';
+import apiHandler from './api';
+
 let app = express();
-let http = require('http').Server(app);
-let apiHandler = require('./api.js');
+let httpServer = http.Server(app);
 
 let config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
 
@@ -12,7 +14,7 @@ app.use(cors());
 let port = process.env.PORT || config.server.port;
 
 
-http.listen(port, () => {
+httpServer.listen(port, () => {
     console.log(`Listening on : ${config.server.port}`);
 });
 
