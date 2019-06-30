@@ -7,7 +7,7 @@
 6 silly lifecycle cf-tracker@1.0.0~prestart: no script for prestart, continuing
 7 info lifecycle cf-tracker@1.0.0~start: cf-tracker@1.0.0
 8 verbose lifecycle cf-tracker@1.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle cf-tracker@1.0.0~start: PATH: /usr/share/npm/bin/node-gyp-bin:/media/shafi/materials/JavaScript/cf_solve_tracker/node_modules/.bin:/media/shafi/materials/Python/torch/install/bin:/home/shafi/anaconda3/condabin:~/anaconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/media/shafi/personal/APPLICATIONS/android-ndk/android-ndk-r15c
+9 verbose lifecycle cf-tracker@1.0.0~start: PATH: /usr/share/npm/bin/node-gyp-bin:/media/shafi/materials/JavaScript/cf_solve_tracker/node_modules/.bin:/media/shafi/materials/Python/torch/install/bin:/home/shafi/anaconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/media/shafi/personal/APPLICATIONS/android-ndk/android-ndk-r15c
 10 verbose lifecycle cf-tracker@1.0.0~start: CWD: /media/shafi/materials/JavaScript/cf_solve_tracker
 11 silly lifecycle cf-tracker@1.0.0~start: Args: [ '-c', 'node -r esm index.js' ]
 12 silly lifecycle cf-tracker@1.0.0~start: Returned: code: 1  signal: null
@@ -24,7 +24,7 @@
 14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:209:5)
 15 verbose pkgid cf-tracker@1.0.0
 16 verbose cwd /media/shafi/materials/JavaScript/cf_solve_tracker
-17 error Linux 4.15.0-51-generic
+17 error Linux 4.15.0-52-generic
 18 error argv "/usr/bin/node" "/usr/bin/npm" "run" "start"
 19 error node v8.10.0
 20 error npm  v3.5.2

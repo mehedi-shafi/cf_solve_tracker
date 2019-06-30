@@ -2,7 +2,8 @@ import fs from 'fs';
 import express from 'express';
 import cors from 'cors';
 import http from 'http';
-import apiHandler from './api';
+import getContestStatus from './api';
+import saveLog from './logger';
 
 let app = express();
 let httpServer = http.Server(app);
@@ -20,9 +21,17 @@ httpServer.listen(port, () => {
 
 app.get('/:handle/:contestid', (req, res) => {
     let url = urlBuidler(req.params.handle, req.params.contestid);
-    apiHandler.getContestStatus(url, (response) => {
+    getContestStatus(url, (response) => {
         res.write(response);
         res.end();
+        let info = {
+            ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+            handler: req.params.handle,
+            contestid: req.params.contestid,
+            contestsolve: response[0],
+            upsolve: response[1]
+        };
+        saveLog(info);
     });
 });
 

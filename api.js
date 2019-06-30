@@ -1,4 +1,4 @@
-let request = require('request');
+import request from 'request';
 
 let getContestStatus = (url, callback) => {
     request(url, (err, response, body) => {
@@ -86,4 +86,4 @@ let getUpSolveSubmissions = (submissions) => {
     return upsolveSubmissions;
 }
 
-module.exports.getContestStatus = getContestStatus;
+export default getContestStatus;
