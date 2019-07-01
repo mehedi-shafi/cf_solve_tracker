@@ -20,7 +20,9 @@ let createLogList = () => {
     let filelist = fs.readdirSync('./LOGS/');
     let loglist = '';
     filelist.forEach(element => {
-        loglist += parse(template, {'logname': path.basename(element).split('.')[0], 'download': '/logs/view/'+path.basename(element).split('.')[0]});
+        loglist += parse(template, {'logname': path.basename(element).split('.')[0],
+                                    'download': '/logs/download/'+path.basename(element).split('.')[0],
+                                    'view': '/logs/view/'+path.basename(element).split('.')[0]});
     });
     return loglist;
 }

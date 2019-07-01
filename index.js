@@ -51,6 +51,11 @@ app.get('/logs/view/:logfile', (req, res) => {
     res.end();
 });
 
+app.get('/logs/download/:logfile', (req, res) => {
+    console.log('Downloading log: ' + req.params.logfile);
+    res.download('./LOGS/' + req.params.logfile + '.json');
+});
+
 let urlBuidler = (handle, contestId) => {
     let url = config.urls['contest_status'];
     url = url.replace('{{ contestId }}', contestId);
