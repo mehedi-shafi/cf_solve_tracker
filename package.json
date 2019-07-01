@@ -18,8 +18,8 @@
     "cors": "^2.8.5",
     "esm": "^3.2.25",
     "express": "^4.16.4",
+    "jquery.json-viewer": "^1.2.0",
     "request": "^2.88.0"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
