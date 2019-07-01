@@ -26,6 +26,7 @@ app.get('/:handle/:contestid', (req, res) => {
     getContestStatus(url, (response) => {
         res.write(response);
         res.end();
+        response = JSON.parse(response);
         let info = {
             ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
             handler: req.params.handle,

@@ -1,1 +1,10 @@
-[{"ip":"::1","timestamp":1561992488793,"handler":"exilour","contestid":"1015","contestsolve":"[","upsolve":"\""}]
+[
+    {
+        "ip": "::1",
+        "timestamp": 1561992897757,
+        "handler": "BATM4N",
+        "contestid": "1077",
+        "contestsolve": 3,
+        "upsolve": 1
+    }
+]
