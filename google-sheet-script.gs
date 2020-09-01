@@ -113,8 +113,8 @@ function currentChosenContest(){
 }
 
 function buildUrl(handle, contestid){
-//  var url = 'https://blue-cf-tracker.herokuapp.com/{{ handle }}/{{ contestid }}';
-  var url = 'https://cf-contest-tracker.herokuapp.com/{{ handle }}/{{ contestid }}';
+//  var url = 'https://blue-cf-tracker.herokuapp.com/{{ handle }}/{{ contestid }}'; // use if the other one doesn't work
+  var url = 'https://cf-contest-tracker.herokuapp.com/{{ handle }}/{{ contestid }}'; // use if the other one doesn't work
   url = url.replace('{{ handle }}', handle);
   url = url.replace('{{ contestid }}', contestid);
   return url;
